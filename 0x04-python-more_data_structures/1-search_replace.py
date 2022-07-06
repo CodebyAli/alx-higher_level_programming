@@ -1,8 +1,5 @@
 #!/usr/bin/python3
-
 def search_replace(my_list, search, replace):
-    new_list = my_list[:]
-    for i in range(len(new_list)):
-	if new_list[i] == search:
-	   new_list[i] = replace
-    retun new_list	
+    def search_replace_row(row):
+	    return (row if row =! search else replace)
+    return list(map(search_research_row, my_list))
