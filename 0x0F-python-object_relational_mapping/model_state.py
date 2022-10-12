@@ -1,13 +1,17 @@
 #!/usr/bin/python3
-"""A script to link class to table in database
+"""A script for using sqlalchemy to model our models using ORM
 """
-import sys
-from model_state import Base, State
+from sqlalchemy import Column, Integer, String, ForeignKey
 
-from sqlalchemy import (create_engine)
+from model_state import Base
 
-if __name__ == "__main__":
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}:3306'.
-                           format(sys.argv[1], sys.argv[2], sys.argv[3]),
-                           pool_pre_ping=True)
-    Base.metadata.create_all(engine)
+
+class City(Base):
+    """cities class for use with sqlalchemy
+        -> inherits from sqlalchemy declarative_base
+    """
+    __tablename__ = 'cities'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(128), nullable=False)
+    state_id = Column(Integer, ForeignKey("states.id"), nullable=False)
